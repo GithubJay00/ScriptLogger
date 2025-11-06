@@ -39,7 +39,3 @@ response = request({
 	Method = "POST",
 	Body = body
 })
-
-print(response.StatusMessage)                               
-print(response.StatusCode)                                  
-print(game:GetService("HttpService"):JSONDecode(response.Body).data)
